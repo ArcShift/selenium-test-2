@@ -1,0 +1,68 @@
+POST /NUPTK/statusNUPTKRead HTTP/1.1
+Host: vervalptk.data.kemdikbud.go.id
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://vervalptk.data.kemdikbud.go.id/NUPTK/Status
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+X-Requested-With: XMLHttpRequest
+Content-Length: 71
+Cookie: ASP.NET_SessionId=1uqo2nn53mudcbc1uf4g1v5k; .ASPXAUTH=A3E162932EB9AE358E0701E69E5AB6C5F287BECD4D1DE8042F0C35207995E7F8657F9F0762CB1AC9056E365FADFB5983FE2F5D83B23A596394FF52B35ECC2F8714608304BAD81F86334F2E668097B58122613FE4EFCD56D2239BA2028E24BFBE1DA3B275A5595432B02DE98B5D793946DC0CB42CD76F1A121B4958D63B635739
+Connection: keep-alive
+
+
+
+var data = {  filter: "npsn~eq~'20562424'",group:"",kode_wilayah:"", page : "1", pageSize:"20",sort:""};
+$.ajax({
+	type: "POST",
+	url:'statusNUPTKRead',
+    dataType : "json",
+    contentType: "application/json; charset=utf-8",
+    data : JSON.stringify(data),
+    success : function(result) {
+        alert(result.success); // result is an object which is created from the returned JSON
+    },
+});
+
+
+
+////===============
+var xhttp = new XMLHttpRequest();
+xhttp.open("GET","http://vervalptk.data.kemdikbud.go.id/NUPTK/statusNUPTKRead/?filter=npsn~eq~'20509296'&page=1&pageSize=20",true);
+xhttp.send();
+
+
+$.post('statusNUPTKRead', {contentType: "application/json; charset=utf-8",data:{  filter: "npsn~eq~'20509296'", page : "1", pageSize:"20"}}, 
+    function(returnedData){
+         console.log(returnedData);
+});
+$.ajax({
+  type: "POST",
+  url:'statusNUPTKRead',
+  contentType: "application/json; charset=utf-8",
+  data: {  filter: "npsn~eq~'20509296'", page : "1", pageSize:"20"}
+});
+success: success
+ dataType: dataType
+charset
+application/json; charset=utf-8
+POST /NUPTK/statusNUPTKRead HTTP/1.1
+Host: vervalptk.data.kemdikbud.go.id
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://vervalptk.data.kemdikbud.go.id/NUPTK/Status
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+X-Requested-With: XMLHttpRequest
+Content-Length: 71
+Cookie: ASP.NET_SessionId=1uqo2nn53mudcbc1uf4g1v5k; .ASPXAUTH=A3E162932EB9AE358E0701E69E5AB6C5F287BECD4D1DE8042F0C35207995E7F8657F9F0762CB1AC9056E365FADFB5983FE2F5D83B23A596394FF52B35ECC2F8714608304BAD81F86334F2E668097B58122613FE4EFCD56D2239BA2028E24BFBE1DA3B275A5595432B02DE98B5D793946DC0CB42CD76F1A121B4958D63B635739
+Connection: keep-alive
+
+sort
+page=1
+pageSize=20
+group
+filter=npsn~eq~'20562424'
+kode_wilayah
