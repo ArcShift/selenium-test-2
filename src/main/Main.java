@@ -15,12 +15,12 @@ import java.io.IOException;
 public class Main {
 
   final static int N_THREAD = 1;
-  Automation[] automations = new Automation[N_THREAD];
+  AutomationKBBI[] automations = new AutomationKBBI[N_THREAD];
 
   public Main() {
     //run thread    
     for (int i = 0; i < automations.length; i++) {
-      automations[i] = new Automation("Program " + i, i);
+      automations[i] = new AutomationKBBI("Program " + i, i);
       automations[i].start();
     }
   }

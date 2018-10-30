@@ -40,7 +40,7 @@ public class Selenium extends Thread {
     try {
       Thread.sleep(second * 1000);
     } catch (InterruptedException ex) {
-      Logger.getLogger(Automation.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(AutomationKBBI.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
 

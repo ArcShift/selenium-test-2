@@ -1,8 +1,10 @@
 package main;
 
 import java.util.Properties;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -16,7 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  *
  * @author Jelajah Tekno Indone
  */
-public class Automation extends Selenium {
+public class AutomationKBBI extends Selenium {
 
   int threadID;
   JavascriptExecutor jsExe;
@@ -24,11 +26,11 @@ public class Automation extends Selenium {
   Database db;
   String query;
   Long key = null;
-  String baseUrl = "http://kbbi.co.id/daftar-kata";
+  String baseUrl = "https://kbbi.co.id/daftar-kata";
   HttpRequest request;
   Response response;
 
-  public Automation(String threadName, int threadID) {
+  public AutomationKBBI(String threadName, int threadID) {
     this.threadName = threadName;
     this.threadID = threadID;
     this.properties = new Properties();
@@ -38,44 +40,30 @@ public class Automation extends Selenium {
   @Override
   public void run() {
     setupBrowser();
-    cek();
-    login();
-    cekNUPTK();
+//    cekKata();//turn on to update kata
+    cariDefinisi();
   }
-  void cek(){
-    
-  }
-  void login() {
-    boolean loginStatus = false;
-    while (!loginStatus) {
-      if (checkTitle("Kemdikbud Login")) {//login
-        //input 
+
+  void cekKata() {
+    while (true) {
+      WebElement row = find(By.className("row"));//TODO: if row not null
+      String[] arrKata = row.getText().split("\n");
+      for (String kata : arrKata) {
+        System.out.println(kata.trim());
+        query = "INSERT IGNORE INTO `kata`(`id`) VALUES (?);";
+        db.executeUpdate(query, kata);
+      }
+      if (findOnce(By.xpath("//a[contains(text(), '»')]"))) {
+        click(By.xpath("//a[contains(text(), '»')]"));
         sleeping(SHORT_WAIT);
-      } else if (checkTitle("Index - VervalPTK")) {//logged in
-        loginStatus = true;
-        logResponse("Berhasil");
-      } else {//error page
-        load(baseUrl);
-        logResponse("Gagal");
+      } else {
+        break;
       }
     }
   }
 
-  void cekNUPTK() {
-    logAction("get");
-    String step = "begin";
-    stepping:
-    while (!step.equals("end")) {
-      switch (step) {
-        case "begin": {
-        }
-        case "1": {
-        }
-        case "2": {
-        }
-      }
-    }
-    logResponse("finish");
+  void cariDefinisi() {
+    load("https://kbbi.kemdikbud.go.id/");
   }
 
   void setupBrowser() {
@@ -84,7 +72,7 @@ public class Automation extends Selenium {
       webDriver = new ChromeDriver(chromeOptions);
     } else {//firefox
       FirefoxOptions firefoxOptions = new FirefoxOptions();
-//    firefoxOptions.addArguments("-headless");
+      firefoxOptions.addArguments("-headless");
       webDriver = new FirefoxDriver(firefoxOptions);
     }
     webDriverWait = new WebDriverWait(webDriver, SHORT_WAIT);
